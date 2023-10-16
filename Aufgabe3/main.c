@@ -24,10 +24,13 @@ void EXTI0_IRQHandler() {
 		EXTI->PR |= EXTI_PR_PR0;
 	}
 }
+
+void delay (int x) {
+	for(int i=0; i*x<100000; i++) {}
+}
 int main() {
 	RCC->AHB1ENR |= (1<<0);		// Taktversorgung für Port A
 	RCC->AHB1ENR |= (1<<3);		// Taktversorgung für Port D
-
 	GPIOD->MODER |= (1<<26);	//Setze GPIO 13 auf Output
 		
 	//EXTI für den Button
@@ -43,6 +46,9 @@ int main() {
 	while (1) {
 		//Aktiviere Interrupt
 		NVIC_EnableIRQ(EXTI0_IRQn);
+		
+		//delay
+		delay(5);
 		
 		//Logik zum toggeln der LED
 		if(state == 0) GPIOD->BSRR |= (1<<13);
