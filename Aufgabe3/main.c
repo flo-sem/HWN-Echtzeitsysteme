@@ -23,9 +23,9 @@ void delay (int time) {
 void EXTI0_IRQHandler() {
 	running_main = 0;
 	running_interrupt = 1;
-	NVIC_DisableIRQ(EXTI0_IRQn);		// NVIC für EXTI0 ausschalten
+	//NVIC_DisableIRQ(EXTI0_IRQn);		// NVIC für EXTI0 ausschalten
 	// Auch mölich: NVIC->ICER[0] |= (1<<6);
-	delay(5);
+	delay(25);
 	if(EXTI->PR & EXTI_PR_PR0) {		// EXTI_PR wird 1 wenn der Interrupt ausgelöst wird
 		++state;
 		state=state%2;
