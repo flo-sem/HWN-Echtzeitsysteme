@@ -70,8 +70,6 @@ a. Die ISR unterbricht die main, ist die ISR fertig, wird die main an der Stelle
 
 b. Da der Interrupt am Anfang in der ISR ausgeschaltet wird, passiert bei mehrfachem Drücken nichts. Der Interrupt kann erst wieder ausgelöst werden, wenn er in der main wieder eingeschaltet wurde.
 
-![Alt text](6b_graph.png)
-
 **Frage 7**
 
 siehe Bilder in 6ab
@@ -79,3 +77,5 @@ siehe Bilder in 6ab
 **Frage 8**
 
 Wird die main innerhalb dieser Funktion von einem Interrupt unterbrochen und die verwendet dieselbe Funktion, kann es passieren, dass der zweite Funktionsaufruf Variablen des Funktionsaufrufs in der main verändert, da einige Variablen nicht im Kontext gesichert wurden (z.b. Werte hinter Pointern)
+
+![Alt text](6b_graph.png)
