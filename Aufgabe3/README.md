@@ -78,4 +78,4 @@ siehe Bilder in 6ab
 
 Wird die main innerhalb dieser Funktion von einem Interrupt unterbrochen und die verwendet dieselbe Funktion, kann es passieren, dass der zweite Funktionsaufruf Variablen des Funktionsaufrufs in der main verändert, da einige Variablen nicht im Kontext gesichert wurden (z.b. Werte hinter Pointern)
 
-![Alt text](6b_graph.png)
+![Alt text](8_graph.png)
