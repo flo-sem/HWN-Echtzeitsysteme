@@ -5,7 +5,6 @@
 # Explizite Verfolgung nur dieser Dateien
 !README.md
 !.gitignore
-!Aufgaben.uvmpw
 
 # Aufgabe 3
 !Aufgabe3/main.c
