@@ -34,11 +34,13 @@ Da für diese Lösung der EXTI0 Interrupt gewählt wurde, ist der IRQn_Type
 "EXTI0_IRQn" (=6).
 
 **Frage 4**
+```
             |----|    
 ISR --------|    |-------
 
     --------|    |-------
 main        |----|
+```
 
 Es läuft die Enlosschleife der main. Wird durch das Betätigen des Buttons, ein Interrupt ausglöst, unterbricht die zugehörige ISR die main. Ist die ISR fertig wird wieder die main aktiv.
 
