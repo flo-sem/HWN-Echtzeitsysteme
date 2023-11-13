@@ -1,9 +1,10 @@
 //---INCLUDES---
 #include "stm32f4xx.h"
 #include "system_stm32f4xx.h"
+
 //---HEADER---
 #include "main.h"
-// Projekt für Aufgabe 3
+// Projekt fÃ¼r Aufgabe 3
 // 		Aufgaben:
 //		- 	Effiziente FIFO Struktur implementieren
 //		-   Aufgabe 3 von Taster Event auf FIFO umbauen
@@ -17,19 +18,18 @@ void delay (int time) {
 }
 
 void EXTI0_IRQHandler() {
-	// Auch mölich: NVIC->ICER[0] |= (1<<6);
-	if(EXTI->PR & EXTI_PR_PR0) {		// EXTI_PR wird 1 wenn der Interrupt ausgelöst wird
+	// Auch mï¿½lich: NVIC->ICER[0] |= (1<<6);
+	if(EXTI->PR & EXTI_PR_PR0) {		// EXTI_PR wird 1 wenn der Interrupt ausgelï¿½st wird
 		*(FIFO_List+(shift_write%100)) = 1;
 		shift_write++;
-		EXTI->PR |= EXTI_PR_PR0;			// EXTI_PR wird zurückgesetzt, wenn eine 1 reingeschrieben wird
+		EXTI->PR |= EXTI_PR_PR0;			// EXTI_PR wird zurï¿½ckgesetzt, wenn eine 1 reingeschrieben wird
 	}
 }
 
 
-
 int main() {
-	RCC->AHB1ENR |= (1<<0);					// Taktversorgung für Port A
-	RCC->AHB1ENR |= (1<<3);					// Taktversorgung für Port D
+	RCC->AHB1ENR |= (1<<0);					// Taktversorgung fÃ¼r Port A
+	RCC->AHB1ENR |= (1<<3);					// Taktversorgung fÃ¼r Port D
 
 	GPIOD->MODER |= (1<<26);				//Setze GPIO 13 auf Output
 
@@ -38,15 +38,16 @@ int main() {
 	EXTI->RTSR |= (1<<0); 					// EXTI0 auf steigende Flanke setzen
 	
 	
-	NVIC_EnableIRQ(EXTI0_IRQn);			//NVIC für EXTI0 einschalten
+	NVIC_EnableIRQ(EXTI0_IRQn);			//NVIC fÃ¼r EXTI0 einschalten
 	// Oder: NVIC->ISER[0] |= (1<<6);
 	
-	NVIC_SetPriority(EXTI0_IRQn,0);	// Priorität von EXTI 0 auf null setzen
-	// Oder: NVIC->IP[4*6] |= (0<<0);
+	NVIC_SetPriority(EXTI0_IRQn,0);	// PrioritÃ¤t von EXTI 0 auf null setzen
+	// Oder: NVIC->IP[4*6] |= (0<<0);	
+	
 	
 	//---MAIN LOOP---
 	while (1) {
-		NVIC_EnableIRQ(EXTI0_IRQn);		//NVIC für EXTI0 einschalten
+		NVIC_EnableIRQ(EXTI0_IRQn);		//NVIC fÃ¼r EXTI0 einschalten
 		// Oder: NVIC->ISER[0] |= (1<<6);
 		if(*(FIFO_List+(shift_read%100)) == 1) {
 			GPIOD->BSRR |= (1<<29);
@@ -57,6 +58,8 @@ int main() {
 		else {
 			GPIOD->BSRR |= (1<<13);
 		}
+		GPIOD->BSRR |= (1<<13);
+
 	}
 
 }
