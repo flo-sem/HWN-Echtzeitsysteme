@@ -11,24 +11,62 @@
 
 #define QUEUE_LENGTH = 5
 static element queue[5];
-
+static uint32_t last_element;
 void delay (int time) {
 	for (int i=0; i<10000*time; ++i) {}		
 }
 
 void push (uint32_t val){
-	for(uint32_t index = 0;index<5;++index) {
-		if(queue[index].intterrupt_ID == 0) {
-			queue[index].intterrupt_ID = val;
-		}
+	for(uint32_t index = 0+last_element;index<5+last_element;++index) {
+		int shifted_index = index % 5;
+		if(queue[shifted_index].intterrupt_ID == 0) {
+			queue[shifted_index].intterrupt_ID = val;
+			last_element = shifted_index;
+		}	
 	}
 }
 
-uint32_pull (
+int Element_In_Queue(){
+	int sum_of_elements = 0;
+	for(int i=0; i<5;i++) {
+		sum_of_elements += queue[i].intterrupt_ID;
+	}
+	return sum_of_elements;
+	
+}
+
+int Read_and_Remove() {
+	int return_var=0;
+	for(uint32_t index = 0+last_element+1;index<5+last_element+1;++index) {
+		int shifted_index = index % 5;
+		if(queue[shifted_index].intterrupt_ID != 0) {
+			return_var = queue[shifted_index].intterrupt_ID;
+			queue[shifted_index].intterrupt_ID = 0;
+			break;
+		}	
+	}
+	return return_var;
+}
+
+void Execute_Interrupt_0() {
+	GPIOD->BSRR |= (1<<29);		//turn LED off
+	delay(20);					//wait for a short period
+	GPIOD->BSRR |= (1<<13);		//turn LED back on
+}
+
+
 void EXTI0_IRQHandler() {
 	// Auch mölich: NVIC->ICER[0] |= (1<<6);
 	if(EXTI->PR & EXTI_PR_PR0) {		// EXTI_PR wird 1 wenn der Interrupt ausgelöst wird
+		push(10);
 		EXTI->PR |= EXTI_PR_PR0;			// EXTI_PR wird zurückgesetzt, wenn eine 1 reingeschrieben wird
+	}
+}
+
+void Init_Queue() {
+	for(uint32_t i = 0; i<5; ++i) {
+		queue[i].next_index	   = 0;
+		queue[i].intterrupt_ID = 0;
 	}
 }
 
@@ -51,20 +89,16 @@ int main() {
 	// Oder: NVIC->IP[4*6] |= (0<<0);	
 	
 	
-	void pop () {
-	}
 	//---MAIN LOOP---
 	while (1) {
 		NVIC_EnableIRQ(EXTI0_IRQn);		//NVIC für EXTI0 einschalten
 		// Oder: NVIC->ISER[0] |= (1<<6);
-		delay(5);
 		//Logik zum toggeln der LED
-		if(1) {
-			GPIOD->BSRR |= (1<<13);
+		if(Element_In_Queue() > 0 && Read_and_Remove() == 10) {
+			Execute_Interrupt_0();
 		}
-		else {
-			GPIOD->BSRR |= (1<<29);
-		}
+		GPIOD->BSRR |= (1<<13);
+
 	}
 
 }

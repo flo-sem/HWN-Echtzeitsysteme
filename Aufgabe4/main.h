@@ -9,4 +9,5 @@ typedef struct node{
 typedef struct element {
 	uint32_t intterrupt_ID;
 	uint32_t next_index;
+	uint32_t last_element;
 } element;
