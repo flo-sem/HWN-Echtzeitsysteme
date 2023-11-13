@@ -17,6 +17,11 @@ void delay (int time) {
 	for (int i=0; i<10000*time; ++i) {}		
 }
 
+void executeInterrupt() {
+	GPIOD->BSRR |= (1<<29);
+	delay(80);
+}
+
 void EXTI0_IRQHandler() {
 	// Auch m�lich: NVIC->ICER[0] |= (1<<6);
 	if(EXTI->PR & EXTI_PR_PR0) {		// EXTI_PR wird 1 wenn der Interrupt ausgel�st wird
@@ -50,10 +55,9 @@ int main() {
 		NVIC_EnableIRQ(EXTI0_IRQn);		//NVIC für EXTI0 einschalten
 		// Oder: NVIC->ISER[0] |= (1<<6);
 		if(*(FIFO_List+(shift_read%100)) == 1) {
-			GPIOD->BSRR |= (1<<29);
+			executeInterrupt();
 			*(FIFO_List+(shift_read%100)) = 0;
 			shift_read++;
-			delay(80);
 		}
 		else {
 			GPIOD->BSRR |= (1<<13);
