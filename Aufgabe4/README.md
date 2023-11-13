@@ -3,10 +3,10 @@
 **Frage 1**
 
 Werden Interrupts mehrfach ausgelöst, während der Interrupt Handler gerade noch bearbeitet wird, soll der Interrupt in einer FIFO-Liste gespeichert werden um als nächstes ausgeführt zu werden.
-Vorteile: 
-- Interrupts gehen nicht verloren
-Nachteile:
-- Bearbeitung des Interrupts dauert länger
+- Vorteile: 
+Interrupts gehen nicht verloren
+- Nachteile:
+Bearbeitung des Interrupts dauert länger
 
 **Frage 2**
 
