@@ -17,8 +17,8 @@ Sind Lese- und Schreibzugriff am Ende der Liste angelangt, springen Sie wieder n
 
 **Frage 3**
 
-Probleme: Pufferspeicherüberlauf, ISR kann durch Interrupt unterbrochen werden, Pufferspeicher benötigt Speicher
-Vorteile: Keine Interrupts gehen verloren
+- Probleme: Pufferspeicherüberlauf, ISR kann durch Interrupt unterbrochen werden, Pufferspeicher benötigt Speicher
+- Vorteile: Keine Interrupts gehen verloren
 
 **Frage 4**
 
