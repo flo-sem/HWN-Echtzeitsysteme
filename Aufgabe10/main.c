@@ -17,7 +17,7 @@ void TIM4_Configuration() {
 	
 	Die Basiszeit ergibt sich aus:
 		t_Basis = 1/f_clock * (PSC + 1)
-	
+		
 	ARR: Auto reload register
 		Dieses Register bestimmt, wie viele Zähleinheiten für eine vollständige PWM-Periode benötigt werden.
 		Also ob der Zähler 100, 200, 1000, ... Basiszeiten zählen soll.
