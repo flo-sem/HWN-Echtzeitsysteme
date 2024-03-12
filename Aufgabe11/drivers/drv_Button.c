@@ -1,5 +1,6 @@
 #include "drv_Button.h"
 #include "stm32f4xx.h"
+#include <stddef.h>
 
 void drv_button_init(void) {
 	RCC->AHB1ENR |= (1<<0);			// Taktversorgung für Port A
@@ -8,13 +9,13 @@ void drv_button_init(void) {
 }
 
 void drv_button_CB_pressed_init(void (*callback)(void)){
-	if (callback != 0){             // Prüft auf einen validen Callback      
+	if (callback != NULL){             // Prüft auf einen validen Callback      
         callback();
-    }	
+	}
 }
 
-void drv_button_CB_released_init(void (*callback)(void)) {
-	if (callback != 0) {            // Prüft auf einen validen Callback 
+void drv_button_CB_released_init(void (*callback)(void)){
+	if (callback != NULL) {            // Prüft auf einen validen Callback 
         callback();
     }
 }
