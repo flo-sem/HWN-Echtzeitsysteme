@@ -1,7 +1,7 @@
 #include "drv_Timer.h"
 #include <stddef.h>
 
-extern uint32_t pwm_value;
+uint32_t pwm_value;
 
 void drv_timer4_init(void)
 {
