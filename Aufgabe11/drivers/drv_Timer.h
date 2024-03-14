@@ -1,6 +1,9 @@
 /* Include System Libaries */
 #include "stm32f4xx.h"
 
+extern uint32_t e_pwm_value;
+extern uint32_t e_pwm_increment;
+
 /*Externe (globale) Funktionen zur Meldung eines periodischen Taktsignals und der Augabe eines PWM-Signals: */
 
 /**

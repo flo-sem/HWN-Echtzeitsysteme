@@ -1,7 +1,9 @@
 #include "drv_Timer.h"
 #include <stddef.h>
 
-extern uint16_t pwmValue;
+uint32_t e_pwm_value = 0;  // Definition und Initialisierung der Variable
+uint32_t e_pwm_increment = 0;
+
 
 void drv_timer4_init(void)
 {
@@ -15,20 +17,32 @@ void drv_timer4_init(void)
     //TIM4->CCMR1 &= ~TIM_CCMR1_OC1M_0;
 
     TIM4->CCER |= TIM_CCER_CC1E; // Enable Capture/Compare Channel 1
+
     TIM4->DIER &= ~TIM_DIER_UIE; // Disable update interrupt (Update-Interrupt deaktivieren) ????
 }
 
 void drv_timer4_CB_init(void(*callback)(void))
 {
-	if(!(callback == NULL))
+	if(callback != NULL)
 	{
-	callback();
+		callback();
 	}
 }
 
 void drv_timer4_PWM(uint32_t uiPWM_Start, uint32_t uiPWM_Value)
 {
+	// Set PWM mode 1 (OC1M bits 110)
+	TIM4->CCMR1 |= TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2; 
+    TIM4->CCMR1 &= ~TIM_CCMR1_OC1M_0;
+
+    TIM4->CCER |= TIM_CCER_CC1E; // Enable Capture/Compare Channel 1
 	TIM4->CCR1 = uiPWM_Start;
+<<<<<<< Updated upstream
 	pwmValue = uiPWM_Value;
+=======
+	
+	e_pwm_value = uiPWM_Start;
+	e_pwm_increment = uiPWM_Value;
+>>>>>>> Stashed changes
 } 
 
