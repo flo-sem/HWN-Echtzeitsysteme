@@ -1,5 +1,3 @@
-/*Externe (globale) Funktionen zum Erkennen von Tastendr�cken auf dem Demonoard : */
-
 /**
  * @brief Diese Funktion initialisiert den Button.
  *
