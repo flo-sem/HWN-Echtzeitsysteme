@@ -5,6 +5,9 @@
 extern uint32_t e_pwm_value;
 extern uint32_t e_pwm_increment;
 
+uint32_t now = 0;
+uint32_t brightness = 0;
+
 void (*func_ptr_CB) (void) = NULL;
 
 void drv_timer4_init(void) {
@@ -12,7 +15,7 @@ void drv_timer4_init(void) {
     TIM4->CR1 |= TIM_CR1_CEN;           // Enable Timer 4
 
     TIM4->PSC = 1600 - 1;  // Set prescaler to 1600 (divide clock by 1600) -> clock 10kHz
-    TIM4->ARR = 100 - 1;   // Set auto-reload register to 100
+    TIM4->ARR = 10 - 1;   // Set auto-reload register to 100
 	
 	TIM4->CCMR1 |= TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2 & ~TIM_CCMR1_OC1M_0; // Set PWM mode 1 (OC1M bits 110)
 
@@ -42,13 +45,23 @@ void drv_timer4_PWM(uint32_t uiPWM_Start, uint32_t uiPWM_Value) {
 	e_pwm_increment = uiPWM_Value;
 }
 
+void startBluelight(){
+	brightness = 10;
+	TIM4->CCR1 = brightness;
+}
+
 void TIM4_IRQHandler() {
 	if (TIM4->SR & TIM_SR_UIF) {
+		++now;
 		if(func_ptr_CB != NULL)
 		{
 			func_ptr_CB(); // Execute initalized CB function if it was set.
 		}
-		TIM4->CCR1 = e_pwm_value; // Update the PWM value (PWM-Wert aktualisieren)
+		if(brightness > 0)
+		{
+			brightness -= 1;
+			TIM4->CCR1 = brightness;
+		}			// Update the PWM value (PWM-Wert aktualisieren)
         TIM4->SR &= ~TIM_SR_UIF; // Clear UIF
     }
 }
