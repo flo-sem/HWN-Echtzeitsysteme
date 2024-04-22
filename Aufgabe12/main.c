@@ -34,7 +34,9 @@ int main() {
 				}
 				break;
 			case RED_BLUE:
-				
+				if(now-oldTime > 10000) {
+					switchState(&myStateMachine, RED);
+				}
 				break;
 			
 		}
