@@ -6,8 +6,21 @@
 int main() {
 	StateMachine myStateMachine;
 	initializeStateMachine(&myStateMachine);
-	
     while (1) {
-        // Main program logic here (Hauptprogramm-Logik hier)
+        //State machine
+		switch(myStateMachine.current_state) {
+			case RED:
+				if (
+				break;
+			case RED_YELLOW:
+				break;
+			case GREEN:
+				break;
+			case YELLOW:
+				break;
+			case RED_BLUE:
+				break;
+			
+		}
     }
 }
