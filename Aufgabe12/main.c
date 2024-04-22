@@ -6,6 +6,10 @@
 
 uint32_t buttonPressed = 0;
 uint32_t now = 0;
+uint32_t oldTime = 0;
+
+uint32_t e_pwm_value;
+uint32_t e_pwm_increment;
 
 void setButtonPressed() {
 	buttonPressed = 1;

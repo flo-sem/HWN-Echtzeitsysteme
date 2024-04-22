@@ -1,4 +1,9 @@
+#ifndef STATE_MACHINE_H
+#define STATE_MACHINE_H
+
 #include "stm32f4xx.h"
+
+extern uint32_t oldTime;
 
 /* Define the different States */ 
 typedef enum {
@@ -16,9 +21,9 @@ typedef struct {
 	Event current_event;
 } StateMachine;
 
-uint32_t oldTime;
-
 /* Function prototypes */
 void initializeStateMachine(StateMachine *machine);
 void handleEvent(StateMachine *machine, Event event);
 void switchState(StateMachine *machine, State state);
+
+#endif //STATE_MACHINE_H

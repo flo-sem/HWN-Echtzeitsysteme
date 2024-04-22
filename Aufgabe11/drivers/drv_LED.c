@@ -3,10 +3,6 @@
 
 void drv_led_init(void) {
     RCC->AHB1ENR |= (1 << 3);	// Taktversorgung für Port D
-	//GPIOD->MODER |= (1 << 24);  //Setze GPIO 12 auf Output
-	//GPIOD->MODER |= (1 << 26);	//Setze GPIO 13 auf Output
-    //GPIOD->MODER |= (1 << 28);	//Setze GPIO 14 auf Output
-	//GPIOD->MODER |= (1 << 30);	//Setze GPIO 15 auf Output
 	
 	// Konfiguriere den GPIO-Pin (PD12) für alternative Funktion (AF2)
     GPIOD->AFR[1] |= (2 << 16);  // Set alternative function AF2 for PD12 (Alternative Funktion AF2 für PD12 setzen)
