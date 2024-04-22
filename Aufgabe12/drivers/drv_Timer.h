@@ -1,5 +1,5 @@
 #include "stdint.h"
-
+uint32_t now = 0;
 /**
  * @brief Diese Funktion initialisiert den Timer4.
  * 
@@ -27,3 +27,5 @@ void drv_timer4_CB_init(void(*callback)(void));
  * @param uiPWM_Value Wert um den der PWM-Dutycycle bei einem Event geändert wird.
  */
 void drv_timer4_PWM(uint32_t uiPWM_Start, uint32_t uiPWM_Value);
+
+int getCurrentTime();

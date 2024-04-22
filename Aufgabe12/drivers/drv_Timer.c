@@ -5,7 +5,6 @@
 extern uint32_t e_pwm_value;
 extern uint32_t e_pwm_increment;
 
-uint32_t now = 0;
 uint32_t brightness = 0;
 
 void (*func_ptr_CB) (void) = NULL;
@@ -64,5 +63,9 @@ void TIM4_IRQHandler() {
 		}			// Update the PWM value (PWM-Wert aktualisieren)
         TIM4->SR &= ~TIM_SR_UIF; // Clear UIF
     }
+}
+
+int getCurrentTime() {
+	return now;
 }
 

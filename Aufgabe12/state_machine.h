@@ -1,11 +1,13 @@
+#include "stm32f4xx.h"
+
 /* Define the different States */ 
 typedef enum {
 	RED, RED_YELLOW, GREEN, YELLOW, RED_BLUE
 } State;
 
 typedef enum {
-    BUTTON_PRESS,
-	TIME_UP
+	NO_EVENT,
+    BUTTON_PRESS
 } Event;
 
 // Define state machine structure
@@ -14,8 +16,9 @@ typedef struct {
 	Event current_event;
 } StateMachine;
 
+uint32_t oldTime;
+
 /* Function prototypes */
 void initializeStateMachine(StateMachine *machine);
 void handleEvent(StateMachine *machine, Event event);
 void switchState(StateMachine *machine, State state);
-int calcTime();
