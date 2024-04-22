@@ -46,6 +46,7 @@ int main() {
 				}
 				break;
 			case RED_BLUE:
+				// PWM FREQUENZ =(now-oldTime )/ 10000
 				if(now-oldTime > 10000) {
 					switchState(&myStateMachine, RED);
 				}

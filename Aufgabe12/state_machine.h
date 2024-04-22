@@ -21,6 +21,7 @@ typedef struct {
 	Event current_event;
 } StateMachine;
 
+
 /* Function prototypes */
 void initializeStateMachine(StateMachine *machine);
 void handleEvent(StateMachine *machine, Event event);
