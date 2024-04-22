@@ -2,9 +2,6 @@
 #include "drv_Timer.h"
 #include <stddef.h>
 
-extern uint32_t e_pwm_value;
-extern uint32_t e_pwm_increment;
-
 uint32_t brightness = 0;
 
 void (*func_ptr_CB) (void) = NULL;

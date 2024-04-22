@@ -1,5 +1,9 @@
 #include "stdint.h"
-uint32_t now = 0;
+
+extern uint32_t now;
+extern uint32_t e_pwm_value;
+extern uint32_t e_pwm_increment;
+
 /**
  * @brief Diese Funktion initialisiert den Timer4.
  * 

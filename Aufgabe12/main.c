@@ -2,6 +2,14 @@
 #include "main.h"
 #include "state_machine.h"
 #include "drivers/drv_Timer.h"
+#include <stdint.h>
+
+uint32_t buttonPressed = 0;
+uint32_t now = 0;
+
+void setButtonPressed() {
+	buttonPressed = 1;
+}
 
 int main() {
 	StateMachine myStateMachine;
