@@ -17,3 +17,5 @@ typedef struct {
 /* Function prototypes */
 void initializeStateMachine(StateMachine *machine);
 void handleEvent(StateMachine *machine, Event event);
+void switchState(StateMachine *machine, State state);
+int calcTime();

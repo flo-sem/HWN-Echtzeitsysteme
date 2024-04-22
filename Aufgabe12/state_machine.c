@@ -8,3 +8,11 @@ void initializeStateMachine(StateMachine *machine) {
 void handleEvent(StateMachine *machine, Event event) {
 	machine->current_event = event;
 }
+
+void switchState(StateMachine *machine, State state) {
+	machine->current_state = state;
+}
+
+int calcTime() {
+	return 0;
+}
