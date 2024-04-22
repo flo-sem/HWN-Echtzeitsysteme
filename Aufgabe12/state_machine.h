@@ -4,7 +4,8 @@ typedef enum {
 } State;
 
 typedef enum {
-    BUTTON_PRESS
+    BUTTON_PRESS,
+	TIME_UP
 } Event;
 
 // Define state machine structure
@@ -12,3 +13,7 @@ typedef struct {
     State current_state;
 	Event current_event;
 } StateMachine;
+
+/* Function prototypes */
+void initializeStateMachine(StateMachine *machine);
+void handleEvent(StateMachine *machine, Event event);
