@@ -2,8 +2,6 @@
 #include "drv_Timer.h"
 #include <stddef.h>
 
-uint32_t brightness = 0;
-
 void (*func_ptr_CB) (void) = NULL;
 
 void drv_timer4_init(void) {
@@ -41,9 +39,8 @@ void drv_timer4_PWM(uint32_t uiPWM_Start, uint32_t uiPWM_Value) {
 	e_pwm_increment = uiPWM_Value;
 }
 
-void startBluelight(){
-	brightness = 10;
-	TIM4->CCR1 = brightness;
+void setDutycycle(uint32_t timeIn){
+	TIM4->CCR1 = (timeIn/1000);
 }
 
 void TIM4_IRQHandler() {
@@ -52,12 +49,7 @@ void TIM4_IRQHandler() {
 		if(func_ptr_CB != NULL)
 		{
 			func_ptr_CB(); // Execute initalized CB function if it was set.
-		}
-		if(brightness > 0)
-		{
-			brightness -= 1;
-			TIM4->CCR1 = brightness;
-		}			// Update the PWM value (PWM-Wert aktualisieren)
+		}		// Update the PWM value (PWM-Wert aktualisieren)
         TIM4->SR &= ~TIM_SR_UIF; // Clear UIF
     }
 }
